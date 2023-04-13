@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Welcome User
+                    Welcome Admin
                 </div>
             </div>
         </div>
