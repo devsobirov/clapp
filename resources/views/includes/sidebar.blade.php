@@ -76,9 +76,9 @@
                     <li><a href="uc-lightgallery.html">Light Gallery</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="widget-basic.html" class="" aria-expanded="false">
-                    <i class="bi bi-gear-wide"></i><span class="nav-text">Widget</span>
+            <li @if (request()->routeIs('admin.users.*')) class="mm-active" @endif>
+                <a href="{{route('admin.users.index')}}" class="" aria-expanded="false">
+                    <i class="bi bi-person"></i><span class="nav-text">Users</span>
                 </a>
             </li>
         </ul>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::view('/', 'admin.home')->name('home');
+    Route::resource('users', UserController::class)->except(['show', 'delete'])->names('users');
 });
 
 Auth::routes(['verify' => false, 'reset' => false, 'register' => false]);

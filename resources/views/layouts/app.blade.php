@@ -50,6 +50,7 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+            @include('includes.messages')
             <!-- row -->
 			<div class="container">
                 @yield('content')

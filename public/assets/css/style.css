@@ -5197,14 +5197,14 @@ textarea.form-control-lg {
 .w-auto {
   width: auto !important; }
 
-.mw-100 {
-  max-width: 100% !important; }
+.mw-100 {max-width: 100% !important; }
+.mw-25vw {min-width: 25vw !important; }
+.mw-50vw {min-width: 50vw !important; }
 
 .vw-100 {
   width: 100vw !important; }
 
-.min-vw-100 {
-  min-width: 100vw !important; }
+.min-w-100 {min-width: 100vw !important; }
 
 .h-25 {
   height: 25% !important; }
