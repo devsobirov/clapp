@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin(): bool
+    {
+        return !!$this->is_admin;
+    }
+
     public function avatar_url(): string
     {
         return asset('images/no-img-avatar.png');

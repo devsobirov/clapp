@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -19,17 +20,15 @@ class CategoryController extends Controller
     {
         $categories = Category::where('parent_id', $category->id)
             ->orderBy('order')->orderBy('id', 'desc')->paginate(15);
-        return view('admin.categories.index', compact('category'));
-    }
-
-    public function create()
-    {
-        //
+        return view('admin.categories.index', compact('category', 'categories'));
     }
 
     public function store(Request $request)
     {
         if ($request->parent) return $this->storeParent($request);
+
+        $category = Category::create($this->getValidData($request));
+        return redirect()->back()->with('success', $category->title . " successfully created!");
     }
 
     public function storeParent(Request $request)
@@ -52,6 +51,9 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         if ($request->parent) return $this->updateParent($request, $category);
+
+        $category->update($this->getValidData($request));
+        return redirect()->route('admin.categories.show', $category->parent_id);
     }
 
     public function updateParent(Request $request, Category $category)
@@ -66,4 +68,24 @@ class CategoryController extends Controller
     {
         //
     }
+
+    private function getValidData(Request $request): array
+    {
+        $data = $request->validate([
+            'title' => 'required|string',
+            'order' => 'required|numeric',
+            'parent_id' => 'required|numeric',
+            'image' => 'nullable|image|max:1024'
+        ]);
+
+        if (isset($data['image'])) {
+            $dir = "'/assets/img/category-' . $request->parent_id";
+            $name = Str::random(6) . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($dir), $name)->getPathname();
+            $data['image'] = $dir . '/' . $name;
+        }
+
+        return $data;
+    }
+
 }

@@ -43,4 +43,10 @@ class Category extends Model
             ->orderBy('order')->orderBy('id', 'desc')
             ->get();
     }
+
+    public function image_url(): string
+    {
+        if ($this->image) return asset($this->image);
+        return '';
+    }
 }
