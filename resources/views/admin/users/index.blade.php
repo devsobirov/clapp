@@ -7,7 +7,7 @@
                 <h4 class="card-title">Users List ({{$users->total()}})</h4>
                 <a href="{{route('admin.users.create')}}" class="btn btn-outline-primary">Create user</a>
             </div>
-            <div class="card">
+            <div class="card" style="height: auto">
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-responsive-md">

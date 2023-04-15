@@ -5,33 +5,23 @@
     <div class="dlabnav-scroll">
         <p class="menu-title style-1"> Main Menu</p>
         <ul class="metismenu" id="menu">
+            <li @if (request()->routeIs('homepage')) class="mm-active" @endif>
+                <a href="{{route('homepage')}}" class="" aria-expanded="false">
+                    <i class="bi bi-house"></i><span class="nav-text">Home</span>
+                </a>
+            </li>
+            @foreach ($g_categories->whereNull('parent_id') as $g_parent)
             <li>
                 <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-                    <i class="bi bi-grid"></i><span class="nav-text">Dashboard</span>
+                    <i class="bi bi-grid"></i><span class="nav-text">{{$g_parent->title}}</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="#">Dashboard Light</a></li>
-                    <li><a href="#">Dashboard Dark</a></li>
+                    @foreach ($g_categories->where('parent_id', $g_parent->id) as $g_cat)
+                    <li><a href="#">{{$g_cat->title}}</a></li>
+                    @endforeach
                 </ul>
             </li>
-            <li>
-                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-                    <i class="bi bi-shop-window"></i><span class="nav-text">Restaurant</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-                    <i class="bi bi-bicycle"></i><span class="nav-text">Drivers</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="deliver-main.html">Dashboard</a></li>
-                    <li><a href="deliver-order.html">Orders</a></li>
-                </ul>
-            </li>
+            @endforeach
 
             <li class="menu-title">Admin</li>
             <li>
@@ -62,18 +52,23 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-                    <i class="bi bi-heart"></i><span class="nav-text">Plugins</span>
+            <li @if (request()->routeIs('admin.categories.*')) class="mm-active" @endif>
+                <a class="has-arrow " href="javascript:void(0);"
+                    aria-expanded="{{request()->routeIs('admin.categories.*') ? 'true' : 'false'}}">
+                    <i class="bi bi-list"></i><span class="nav-text">Menu Categories</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li><a href="uc-select2.html">Select 2</a></li>
-                    <li><a href="uc-nestable.html">Nestedable</a></li>
-                    <li><a href="uc-noui-slider.html">Noui Slider</a></li>
-                    <li><a href="uc-sweetalert.html">Sweet Alert</a></li>
-                    <li><a href="uc-toastr.html">Toastr</a></li>
-                    <li><a href="map-jqvmap.html">Jqv Map</a></li>
-                    <li><a href="uc-lightgallery.html">Light Gallery</a></li>
+                <ul aria-expanded="{{request()->routeIs('admin.categories.*') ? 'true' : 'false'}}">
+                    <li @if (request()->routeIs('admin.categories.index')) class="mm-active" @endif>
+                        <a @if (request()->routeIs('admin.categories.index')) class="mm-active" @endif href="{{route('admin.categories.index')}}">Main Categories</a>
+                    </li>
+                    @foreach ($g_categories->whereNull('parent_id') as $g_parent)
+                    <li @if (request()->routeIs('admin.categories.show', $g_parent->id)) class="mm-active" @endif>
+                        <a @if (request()->routeIs('admin.categories.show', $g_parent->id)) class="mm-active" @endif
+                            href="{{route('admin.categories.show', $g_parent->id)}}">
+                            {{$g_parent->title}}
+                        </a>
+                    </li>
+                    @endforeach
                 </ul>
             </li>
             <li @if (request()->routeIs('admin.users.*')) class="mm-active" @endif>
