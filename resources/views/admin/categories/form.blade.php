@@ -15,7 +15,7 @@
                     </div>
                     <div class="modal-inside">
                         <label class="form-label mb-2">Parent</label>
-                        <select name="parent_id" class="default-select form-control wide mb-3 form-control-lg ms-0" required>
+                        <select name="parent_id" class="default-select form-control wide mb-3 form-control-md ms-0" required>
                             @foreach ($g_categories->whereNull('parent_id') as $parent)
                             <option @selected($parent->id == $category->parent_id) value="{{$parent->id}}">{{$parent->title}}</option>
                             @endforeach

@@ -45,12 +45,18 @@
                     @endforeach
                 </ul>
             </li>
+
+            <li @if (request()->routeIs('admin.fields.*')) class="mm-active" @endif>
+                <a href="{{route('admin.fields.index')}}" class="" aria-expanded="false">
+                    <i class="bi bi-file-earmark-plus"></i><span class="nav-text">Extra Fileds</span>
+                </a>
+            </li>
+
             <li @if (request()->routeIs('admin.users.*')) class="mm-active" @endif>
                 <a href="{{route('admin.users.index')}}" class="" aria-expanded="false">
                     <i class="bi bi-person"></i><span class="nav-text">Users</span>
                 </a>
             </li>
-
             @endif
         </ul>
     </div>
