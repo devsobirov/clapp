@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FieldController;
+use App\Http\Controllers\Admin\FoodController;
 
 
 Route::middleware('auth')->group(function () {
@@ -18,6 +19,8 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::resource('users', UserController::class)->except(['show', 'delete'])->names('users');
     Route::resource('categories', CategoryController::class)->names('categories');
     Route::resource('fields', FieldController::class)->only(['index', 'store'])->names('fields');
+    Route::resource('food', FoodController::class)->except(['delete', 'show'])->names('food');
+    Route::get('food/category/{category}', [FoodController::class, 'category'])->name('food.category');
 });
 
 Auth::routes(['verify' => false, 'reset' => false, 'register' => false]);

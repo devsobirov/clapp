@@ -383,6 +383,13 @@
 				console.error( err.stack );
 			} );
 		}
+
+        let editors = document.querySelectorAll('.ck-editor');
+        if (editors.length) {
+            editors.forEach(richEditor => {
+                ClassicEditor.create(richEditor).then(editor => window.editor = editor).catch(e => console.log(e));
+            });
+        }
 	}
 
 	var handleMenuPosition = function(){

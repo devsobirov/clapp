@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>All menu items ({{$food->total()}})</h2>
+    <h2>Menu items: {{$category->parent?->title}} - {{$category->title}} ({{$food->total()}})</h2>
     <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap">
         <form action="{{route('admin.food.index')}}" class="input-group search-area2">
             <span class="input-group-text p-0">
@@ -12,7 +12,7 @@
                     </svg>
                 </a>
             </span>
-            <input type="text" name="search" value="{{request()->get('search')}}" class="form-control p-0" placeholder="Search meal + Enter">
+            <input type="text" name="search" value="{{request()->get('search')}}" class="form-control p-0" placeholder="Search meal in {{$category->title}} + Enter">
         </form>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" data-bs-toggle="modal" data-bs-target="#modalFood">
@@ -25,7 +25,7 @@
             <form method="POST" class="modal-content" action="{{route('admin.food.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New Meal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add New Meal to {{$category->title}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -38,29 +38,10 @@
                         <label for="announcement" class="form-label">Announcement</label>
                         <input type="text" name="announcement" value="{{old('announcement')}}" class="form-control" id="announcement" placeholder="Fettucini" required>
                     </div>
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="modal-inside">
-                                <label class="form-label mb-2">Parent</label>
-                                <select name="parent_id" class="default-select form-control wide mb-3 form-control-md ms-0">
-                                    <option value="" selected>Select (optional)</option>
-                                    @foreach ($g_categories->whereNull('parent_id') as $parent)
-                                    <option @selected($parent->id == old('parent_id')) value="{{$parent->id}}">{{$parent->title}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="modal-inside">
-                                <label class="form-label mb-2">Category</label>
-                                <select name="category_id" class="default-select form-control wide mb-3 form-control-md ms-0" required>
-                                    <option value="" selected disabled>Select</option>
-                                    @foreach ($g_categories->whereNotNull('parent_id') as $category)
-                                    <option @selected($category->id == old('category_id')) value="{{$category->id}}">{{$category->title}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                    <div class="modal-inside">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" name="" value="{{$category->parent?->title}} > {{$category->title}}" class="form-control" id="category" readonly>
+                        <input type="hidden" name="category_id" value="{{$category->id}}">
                     </div>
                     <div class="modal-inside">
                         <label for="food-img" class="form-label">Item Image</label>
@@ -139,3 +120,4 @@
     </div>
 </div>
 @endsection
+

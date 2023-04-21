@@ -88,5 +88,7 @@
 	<script src="{{asset('assets/js/dlabnav-init.js')}}"></script>
     <script src="{{asset('assets/vendor/swiper/js/swiper-bundle.min.js')}}"></script>
 	<script src="{{asset('assets/js/demo.js')}}"></script>
+
+    @yield('scripts')
 </body>
 </html>

@@ -19,17 +19,17 @@ class Field extends Model
     const TYPES = [
         self::TYPE_INPUT => [
             'name' => 'Input',
-            'el' => "<input type='text'>",
+            'el' => "<input type='text' value='_VALUE_' class='form-control' name='_NAME_' placeholder='_PL_'>",
             'description' => "Single line text input, max: 255 chars"
         ],
         self::TYPE_TEXTAREA => [
             'name' => 'Textarea',
-            'el' => "<textarea></textarea>",
+            'el' => "<textarea class='form-control' rows='2' name='_NAME_' placeholder='_PL_'>_VALUE_</textarea>",
             'description' => "Multi line text input"
         ],
         self::TYPE_RICH_EDITOR => [
             'name' => 'Rich text editor',
-            'el' => "",
+            'el' => "<textarea class='form-control py-3 ck-editor init-editor' name='_NAME_' placeholder='_PL_'>_VALUE_</textarea>",
             'description' => "Editor for formatted text with HTML markup"
         ],
     ];
@@ -56,5 +56,35 @@ class Field extends Model
             return self::TYPES[$this->type]['name'];
         }
         return 'Unknown';
+    }
+
+    public function getDefinition(): string
+    {
+        if (array_key_exists($this->type, self::TYPES)) {
+            return self::TYPES[$this->type]['description'];
+        }
+        return 'Unknown';
+    }
+
+    public function getRawEl(): string
+    {
+        if (array_key_exists($this->type, self::TYPES)) {
+            return self::TYPES[$this->type]['el'];
+        }
+        return 'Unknown';
+    }
+
+    public function getDOMElement($value = ''): string
+    {
+        $el = $this->getRawEl();
+        $name = $this->id;
+        $placeholder = $this->name;
+        $id = 'field-' . $name;
+        $label = "<div class='d-flex w-100 justify-content-between mb-1' id='$id'>
+                    <label class='form-label'>$placeholder</label>
+                    <button class='remove-field btn btn-outline-danger btn-sm' onclick='rmField($name)' type='button'>Remove field</button>
+                </div>";
+        $el =  str_replace(['_NAME_', '_PL_', '_VALUE_'], [$name, $placeholder, $value], $el);
+        return $label . $el;
     }
 }
