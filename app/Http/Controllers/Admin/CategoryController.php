@@ -79,7 +79,7 @@ class CategoryController extends Controller
         ]);
 
         if (isset($data['image'])) {
-            $dir = "'/assets/img/category-' . $request->parent_id";
+            $dir = '/assets/img/category-' . $request->parent_id;
             $name = Str::random(6) . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path($dir), $name)->getPathname();
             $data['image'] = $dir . '/' . $name;
