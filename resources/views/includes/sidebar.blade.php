@@ -15,13 +15,14 @@ $g_parents = $g_categories->whereNull('parent_id');
                 </a>
             </li>
             @foreach ($g_parents as $g_parent)
-            <li>
-                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+            @php $url = route('menu.category', ['category' => $g_parent->id]); @endphp
+            <li @if(request()->url() == $url) class="mm-active" @endif>
+                <a class="has-arrow @if(request()->is($url)) mm-active @endif" href="javascript:void(0);" aria-expanded="false">
                     <i class="bi bi-grid"></i><span class="nav-text">{{$g_parent->title}}</span>
                 </a>
                 <ul aria-expanded="false">
                     @foreach ($g_categories->where('parent_id', $g_parent->id) as $g_cat)
-                    <li><a href="#">{{$g_cat->title}}</a></li>
+                    <li><a href="{{route('menu.menu', $g_cat->id)}}">{{$g_cat->title}}</a></li>
                     @endforeach
                 </ul>
             </li>

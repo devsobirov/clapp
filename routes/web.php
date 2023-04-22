@@ -7,11 +7,17 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FieldController;
 use App\Http\Controllers\Admin\FoodController;
+use App\Http\Controllers\MenuController;
 
 
 Route::middleware('auth')->group(function () {
-    Route::view('/', 'welcome')->name('homepage');
+    Route::view('/', 'home')->name('homepage');
     Route::get('/home', HomeController::class)->name('home');
+    Route::controller(MenuController::class)->group(function () {
+        Route::get('menu/{category}', 'category')->name('menu.category');
+        Route::get('menu/category/{category}', 'menu')->name('menu.menu');
+        Route::get('menu/item/{food}', 'menuItem')->name('menu.item');
+    });
 });
 
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
