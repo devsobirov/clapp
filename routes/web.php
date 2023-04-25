@@ -7,9 +7,11 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FieldController;
 use App\Http\Controllers\Admin\FoodController;
+use App\Http\Controllers\Admin\DocumentController as DocsController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DocumentController;
 
 
 Route::middleware('auth')->group(function () {
@@ -23,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::any('/search', SearchController::class)->name('search');
     Route::view('profile', 'profile')->name('profile.form');
     Route::post('profile', ProfileController::class)->name('profile.save');
+    Route::resource('documents', DocumentController::class)->only(['index', 'show'])->names('docs');
 });
 
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
@@ -32,6 +35,10 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::resource('fields', FieldController::class)->only(['index', 'store'])->names('fields');
     Route::resource('food', FoodController::class)->except(['delete', 'show'])->names('food');
     Route::get('food/category/{category}', [FoodController::class, 'category'])->name('food.category');
+    Route::controller(DocsController::class)->prefix('docs')->as('docs.')->group(function () {
+        Route::post('/save/{id?}', 'save')->name('save');
+        Route::post('/delete/{document}', 'delete')->name('delete');
+    });
 });
 
 Auth::routes(['verify' => false, 'reset' => false, 'register' => false]);
