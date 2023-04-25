@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FieldController;
 use App\Http\Controllers\Admin\FoodController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SearchController;
 
 
 Route::middleware('auth')->group(function () {
@@ -18,6 +19,7 @@ Route::middleware('auth')->group(function () {
         Route::get('menu/category/{category}', 'menu')->name('menu.menu');
         Route::get('menu/item/{food}', 'menuItem')->name('menu.item');
     });
+    Route::any('/search', SearchController::class)->name('search');
 });
 
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {

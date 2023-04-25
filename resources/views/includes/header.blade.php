@@ -7,24 +7,28 @@
             <div class="container d-block my-0">
                 <div class="d-flex align-items-center justify-content-sm-between justify-content-end">
                     <div class="header-left">
-                        <div class="nav-item d-flex align-items-center">
+                        <form action="{{route('search')}}" class="nav-item d-flex align-items-center" id="global-search-form">
                             <div class="d-flex header-bx">
-                                <select class="selectpicker">
-                                        <option>All</option>
-                                        <option>Bites</option>
-                                        <option>Coctails</option>
-                                        <option>Wines</option>
+                                <select class="selectpicker" name="s_category">
+                                    <option value="">All</option>
+                                    @foreach ($g_categories->whereNotNull('parent_id') as $parent)
+                                    <option value="{{$parent->id}}" @selected($parent->id == request()->get('s_category'))>{{$parent->title}}</option>
+                                    @endforeach
                                 </select>
                                 <div class="input-group search-area2 ps-3" id="Serach-bar">
-                                    <span class="input-group-text h-search"><a href="javascript:void(0)"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.3" d="M16.6751 19.4916C16.2195 19.036 16.2195 18.2973 16.6751 17.8417C17.1307 17.3861 17.8694 17.3861 18.325 17.8417L22.9917 22.5084C23.4473 22.964 23.4473 23.7027 22.9917 24.1583C22.5361 24.6139 21.7974 24.6139 21.3417 24.1583L16.6751 19.4916Z" fill="var(--primary)"/>
-                                    <path d="M12.8333 18.6667C16.055 18.6667 18.6666 16.055 18.6666 12.8333C18.6666 9.61168 16.055 7 12.8333 7C9.61163 7 6.99996 9.61168 6.99996 12.8333C6.99996 16.055 9.61163 18.6667 12.8333 18.6667ZM12.8333 21C8.32297 21 4.66663 17.3437 4.66663 12.8333C4.66663 8.32301 8.32297 4.66667 12.8333 4.66667C17.3436 4.66667 21 8.32301 21 12.8333C21 17.3437 17.3436 21 12.8333 21Z" fill="var(--primary)"/>
-                                    </svg>
-                                    </a></span>
-                                    <input type="text" class="form-control"  placeholder="What do you want eat today">
+                                    <span class="input-group-text h-search">
+                                        <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('global-search-form').submit()">
+                                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path opacity="0.3" d="M16.6751 19.4916C16.2195 19.036 16.2195 18.2973 16.6751 17.8417C17.1307 17.3861 17.8694 17.3861 18.325 17.8417L22.9917 22.5084C23.4473 22.964 23.4473 23.7027 22.9917 24.1583C22.5361 24.6139 21.7974 24.6139 21.3417 24.1583L16.6751 19.4916Z" fill="var(--primary)"/>
+                                                <path d="M12.8333 18.6667C16.055 18.6667 18.6666 16.055 18.6666 12.8333C18.6666 9.61168 16.055 7 12.8333 7C9.61163 7 6.99996 9.61168 6.99996 12.8333C6.99996 16.055 9.61163 18.6667 12.8333 18.6667ZM12.8333 21C8.32297 21 4.66663 17.3437 4.66663 12.8333C4.66663 8.32301 8.32297 4.66667 12.8333 4.66667C17.3436 4.66667 21 8.32301 21 12.8333C21 17.3437 17.3436 21 12.8333 21Z" fill="var(--primary)"/>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                    <input type="text" name="g_search" value="{{request()->get('g_search')}}" class="form-control"  placeholder="What do you want eat today + Enter" required minlength="3">
+                                    <button class="d-none"></button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
 
                     <ul class="navbar-nav header-right ">
