@@ -14,14 +14,15 @@
 
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <h4 class=" mb-0 cate-title">{{$category->title}}</h4>
-                {{-- <a href="{{route('admin.categories.show', $parent->id)}}" class="text-primary">View all <i class="fa-solid fa-angle-right ms-2"></i></a> --}}
             </div>
 
-            <ul>
+            <div class="row">
                 @foreach ($menu as $item)
-                    <li>#ID{{$item->id}} - {{$item->name}}</li>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    @include('includes.card-food', ['item' => $item, 'category' => false])
+                </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
     </div>
 </div>

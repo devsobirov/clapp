@@ -11,7 +11,6 @@ class MenuController extends Controller
     // List of sub-categories
     public function category(Category $category)
     {
-        //dd(request()->is('http://clapp.local/menu/1'), request()->url() == 'http://clapp.local/menu/1');
         abort_if($category->parent_id, 404);
         return view('category', ['parent' => $category]);
     }
@@ -30,6 +29,6 @@ class MenuController extends Controller
     // Food or drink item page
     public function menuItem(Food $food)
     {
-        return view('menu-item', compact('food'));
+        return view('menu-item', ['item' => $food]);
     }
 }

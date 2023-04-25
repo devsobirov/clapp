@@ -87,4 +87,9 @@ class Field extends Model
         $el =  str_replace(['_NAME_', '_PL_', '_VALUE_'], [$name, $placeholder, $value], $el);
         return $label . $el;
     }
+
+    public function formattedText(): bool
+    {
+        return in_array($this->type, [self::TYPE_TEXTAREA, self::TYPE_RICH_EDITOR]);
+    }
 }
