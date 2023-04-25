@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@php
+/** @var App\Models\User $user*/
+$user = auth()->user();
+@endphp
+
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -6,14 +11,9 @@
         <div class="setting-right">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="mb-4">{{$user->exists ? 'Update Account' : 'Create Account'}}</h3>
+                    <h3 class="mb-4">My Profile</h3>
 
-                    @if (!$user->exists)
-                    <form method="POST" action="{{route('admin.users.store')}}" class="row" enctype="multipart/form-data">
-                    @else
-                    <form method="POST" action="{{route('admin.users.update', $user->id)}}" class="row" enctype="multipart/form-data">
-                        @method('PATCH')
-                    @endif
+                     <form method="POST" action="{{route('profile.save')}}" class="row" enctype="multipart/form-data">
                         @csrf
                         <div class="col-lg-4 col-sm-12">
                             <p class="fs-18">Photo Profile</p>

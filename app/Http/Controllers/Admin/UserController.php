@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::select('id', 'name', 'email', 'is_admin', 'created_at')->orderBy('id', 'desc')->paginate(15);
+        $users = User::select('id', 'name', 'email', 'avatar', 'is_admin', 'created_at')->orderBy('id', 'desc')->paginate(15);
         return view('admin.users.index', compact('users'));
     }
 
@@ -35,9 +35,9 @@ class UserController extends Controller
             'password' => 'nullable|min:6|confirmed'
         ]);
 
-        if ($data['password']) {
+        if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
-        } else {
+        } elseif (array_key_exists('password', $data)) {
             unset($data['password']);
         }
         $user->update($data);

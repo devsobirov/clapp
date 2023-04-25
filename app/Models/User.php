@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar'
     ];
 
     /**
@@ -49,6 +50,6 @@ class User extends Authenticatable
 
     public function avatar_url(): string
     {
-        return asset('images/no-img-avatar.png');
+        return asset($this->avatar ?? 'images/no-img-avatar.png');
     }
 }

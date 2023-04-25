@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\FieldController;
 use App\Http\Controllers\Admin\FoodController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProfileController;
 
 
 Route::middleware('auth')->group(function () {
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
         Route::get('menu/item/{food}', 'menuItem')->name('menu.item');
     });
     Route::any('/search', SearchController::class)->name('search');
+    Route::view('profile', 'profile')->name('profile.form');
+    Route::post('profile', ProfileController::class)->name('profile.save');
 });
 
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
