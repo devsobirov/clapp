@@ -17,6 +17,7 @@
                                     <th><strong>NAME</strong></th>
                                     <th><strong>Email</strong></th>
                                     <th><strong>Date</strong></th>
+                                    <th><strong>Role</strong></th>
                                     <th><strong></strong></th>
                                 </tr>
                             </thead>
@@ -31,11 +32,17 @@
                                     </td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->created_at->format('d M-Y H:i')}}</td>
+                                    <td>{{$user->getRole()}}</td>
                                     <td>
                                         <div class="d-flex">
                                         @if ($user->id !== auth()->id())
                                             <a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
-                                            <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            @if (auth()->user()->isSuperAdmin())
+                                            <form action="{{route('admin.users.destroy', $user->id)}}" method="POST">
+                                                @csrf @method('DELETE')
+                                                <button onclick="if (!confirm('Delete user?')) {return false;}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                            @endif
                                         @endif
                                         </div>
                                     </td>

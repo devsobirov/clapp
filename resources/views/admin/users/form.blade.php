@@ -53,6 +53,16 @@
                                 <label for="exampleInputPassword1" class="form-label">Password Confirmation</label>
                                 <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="••••••••">
                             </div>
+                            @if (auth()->user()->isSuperAdmin())
+                                <div class="setting-input">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" name="is_admin" @checked($user->isAdmin()) id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Is User Admin?
+                                        </label>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="text-right">
                                 <button class="btn btn-primary float-end w-50 btn-md">Save Profile</button>
                             </div>
