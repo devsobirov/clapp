@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
@@ -15,6 +16,18 @@ class DocumentController extends Controller
 
     public function show(Document $document)
     {
-        dd($document);
+        return view('pdf', compact('document'));
+    }
+
+    public function stream(Document $document)
+    {
+        return response()->make(
+            Storage::get($document->path),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . $document->name . '"'
+            ]
+        );
     }
 }

@@ -7,7 +7,7 @@
 	<meta name="format-detection" content="telephone=no">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    @yield('head')
 	<!-- PAGE TITLE HERE -->
     <title>CLAPP</title>
 

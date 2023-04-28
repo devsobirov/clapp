@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::view('profile', 'profile')->name('profile.form');
     Route::post('profile', ProfileController::class)->name('profile.save');
     Route::resource('documents', DocumentController::class)->only(['index', 'show'])->names('docs');
+    Route::get('stream/{document}', [DocumentController::class, 'stream'])->name('docs.stream');
 });
 
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
