@@ -26,7 +26,12 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="nav-first" role="tabpanel" aria-labelledby="nav-first-tab">
-                                            <img class="img-fluid rounded" src="{{$item->image_url()}}" alt="">
+                                            <div><img class="img-fluid rounded" src="{{$item->image_url()}}" alt=""></div>
+                                            @if($item->video)
+                                            <div>
+                                                <video src="{{$item->video_url()}}" controls muted autoplay class="d-block mw-100 mt-3"></video>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <nav class="d-none">
@@ -34,6 +39,7 @@
                                         <button class="nav-link active" id="nav-first-tab" data-bs-toggle="tab" data-bs-target="#nav-first" type="button" role="tab" aria-controls="nav-first" aria-selected="true">
                                             <img class="img-fluid" src="{{$item->image_url()}}" alt="" width="50">
                                         </button>
+                                        </div>
                                     </nav>
                                 </div>
                                 <style>

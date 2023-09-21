@@ -10,7 +10,7 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+        $this->app->singleton(CategoryComposer::class);
     }
 
     public function boot(): void

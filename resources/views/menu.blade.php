@@ -23,6 +23,8 @@
                 </div>
                 @endforeach
             </div>
+
+            {{$menu->links()}}
         </div>
     </div>
 </div>

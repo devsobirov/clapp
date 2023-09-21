@@ -37,7 +37,7 @@
                                 <h3 class="mb-4">Edit menu item - {{$food->name}}</h3>
                                 <p class="fs-18">Image</p>
                                 <div class= "setting-img d-flex align-items-center mb-4">
-                                        <div class="avatar-upload d-flex align-items-center">
+                                    <div class="avatar-upload d-flex align-items-center">
                                         <div class=" change position-relative d-flex">
                                             <div class="avatar-preview">
                                                 <div id="imagePreview" style="background-image: url({{$food->image_url()}});">
@@ -51,9 +51,24 @@
                                         </div>
 
                                     </div>
-
                                 </div>
 
+                                <input type="file" style="visibility: hidden" name="video" id="video" accept="video/*">
+                                <div class="row align-items-center">
+                                    @if($food->video)
+                                    <div class="col-md-4 col-sm-12"><video controls src="{{$food->video_url()}}" class="d-block mw-100"></video></div>
+                                    <div class="change-btn d-flex align-items-center flex-wrap col-md-4 col-sm-12">
+                                        <label for="video" class="dlab-upload">Выбрать другое видео</label>
+                                    </div>
+                                    @else
+                                        <div class="change-btn d-flex align-items-center flex-wrap col-md-4 col-sm-12">
+                                            <label for="video" class="dlab-upload">Добавить видео</label>
+                                        </div>
+                                    @endif
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="text" style="display: none" class="form-control" id="video-label" readonly>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="setting-input">
@@ -182,5 +197,14 @@
         let btn = document.getElementById('field-'+id);
         btn.closest('.parent').remove();
     }
+
+    const videoInput = document.getElementById('video');
+    const videoLabel = document.getElementById('video-label');
+
+    videoInput.addEventListener('change', function (e) {
+       let value= e.target.value;
+       videoLabel.style.display = value ? 'block' : 'none';
+       videoLabel.value = value;
+    });
 </script>
 @endsection

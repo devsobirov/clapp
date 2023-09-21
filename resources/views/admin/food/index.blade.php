@@ -66,6 +66,10 @@
                         <label for="food-img" class="form-label">Item Image</label>
                         <input type="file" class="form-control" name="image" id="food-img" accept="image/*" required>
                     </div>
+                    <div class="modal-inside">
+                        <label for="food-video" class="form-label">Item Video</label>
+                        <input type="file" class="form-control" name="video" id="food-video" accept="video/*">
+                    </div>
                 </div>
                 </div>
                 <div class="modal-footer">

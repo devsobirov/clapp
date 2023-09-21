@@ -38,12 +38,20 @@ class FoodController extends Controller
             'announcement' => 'required|string|max:255',
             'category_id' => 'required|numeric',
             'image' => 'required|image|max:1024',
+            'video' => 'nullable|mimetypes:video/webm,video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
         ]);
 
         if (!empty($data['image'])) {
             $data['image'] = ImageHelper::save(
                 $request->file('image'),
                 '/assets/img/food-' . $request->category_id
+            );
+        }
+
+        if (!empty($data['video'])) {
+            $data['video'] = ImageHelper::save(
+                $request->file('video'),
+                '/assets/video/food-' . $request->category_id
             );
         }
 
@@ -59,6 +67,7 @@ class FoodController extends Controller
                 'announcement' => 'required|string|max:255',
                 'category_id' => 'required|numeric',
                 'image' => 'nullable|image|max:1024',
+                'video' => 'nullable|mimetypes:video/webm,video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
                 'instruction' => 'nullable|string',
                 'addinitional' => 'nullable|string'
             ]);
@@ -67,6 +76,12 @@ class FoodController extends Controller
                 $data['image'] = ImageHelper::save(
                     $request->file('image'),
                     '/assets/img/food-' . $request->category_id
+                );
+            }
+            if (!empty($data['video'])) {
+                $data['video'] = ImageHelper::save(
+                    $request->file('video'),
+                    '/assets/video/food-' . $request->category_id
                 );
             }
 

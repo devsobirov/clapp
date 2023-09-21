@@ -14,6 +14,7 @@ class Food extends Model
 
     protected $guarded = [];
     const DEFAULT_IMAGE = '';
+    const DEFAULT_VIDEO = '';
 
     public function category(): BelongsTo
     {
@@ -48,6 +49,11 @@ class Food extends Model
 
     public function image_url(): string
     {
-        return asset($this->image ? $this->image : self::DEFAULT_IMAGE);
+        return asset($this->image ?? self::DEFAULT_IMAGE);
+    }
+
+    public function video_url(): string
+    {
+        return asset($this->video ?? self::DEFAULT_VIDEO);
     }
 }
