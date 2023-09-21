@@ -21,7 +21,7 @@
                                         </div>
                                     @endif
                                     <div class="mb-3">
-                                        <label class="text-label form-label text-white" for="email">Введите ваш email чтобы получить ссылку для восстановления</label>
+                                        <label class="text-label form-label text-white" for="email">Enter your email to receive a password reset link</label>
                                         <div class="input-group">
                                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                             <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" placeholder="example@mail.com" required="">
@@ -34,7 +34,7 @@
                                     <div class="row justify-content-center mb-0">
                                         <div class="col-md-10 text-center">
                                             <button type="submit" class="btn btn-primary">
-                                                Отправить ссылку восстановления
+                                                Send Password Reset Link
                                             </button>
                                         </div>
                                     </div>

@@ -13,7 +13,7 @@
                                 </div>
                                 <form method="POST" action="{{ route('password.update') }}">
 
-                                    <h3 class="text-center my-3">Восстановления пароля</h3>
+                                    <h3 class="text-center my-3">Reset password</h3>
                                     @if(session('success'))
                                         <div class="alert alert-success alert-dismissible fade show mb-1 text-right mb-4">
                                             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
@@ -36,7 +36,7 @@
                                     <input type="hidden" name="token" value="{{ $token }}">
 
                                     <div class="row mb-3">
-                                        <label for="email" class="col-md-4 col-form-label text-md-end">Ваша почта</label>
+                                        <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
 
                                         <div class="col-md-6">
                                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
@@ -50,7 +50,7 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="password" class="col-md-4 col-form-label text-md-end">Новый пароль</label>
+                                        <label for="password" class="col-md-4 col-form-label text-md-end">New password</label>
 
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -64,7 +64,7 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Повторите пароль</label>
+                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Repeat password</label>
 
                                         <div class="col-md-6">
                                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -74,7 +74,7 @@
                                     <div class="row mb-0">
                                         <div class="col-md-6 offset-md-4">
                                             <button type="submit" class="btn btn-primary">
-                                                Восстановить пароль
+                                                Reset password
                                             </button>
                                         </div>
                                     </div>
