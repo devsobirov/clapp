@@ -687,7 +687,8 @@ progress {
 
 .img-fluid {
   max-width: 100%;
-  height: auto; }
+  max-height: 300px;
+  height: 100%; }
 
 .img-thumbnail {
   padding: 0.25rem;
@@ -3157,7 +3158,8 @@ textarea.form-control-lg {
   display: none; }
 
 .tab-content > .active {
-  display: block; }
+  display: block;
+text-align: center; }
 
 .navbar {
   position: relative;
@@ -28546,7 +28548,7 @@ table.dataTable.display tbody td {
 .card.review img {
   height: 10.313rem;
   width: 9.188rem;
-  object-fit: cover; }
+  object-fit: contain; }
 
 .card.review .common .plus {
   display: inline-block;
@@ -29171,7 +29173,7 @@ table.dataTable.display tbody td {
 .media-bx img {
   width: 3.5rem;
   height: 3.5rem;
-  object-fit: cover; }
+  object-fit: contain; }
 
 .order-history .default-select {
   color: #3D4152; }
