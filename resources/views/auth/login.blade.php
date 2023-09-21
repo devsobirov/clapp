@@ -1,5 +1,4 @@
 @extends('layouts.guest')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center h-100 align-items-center">

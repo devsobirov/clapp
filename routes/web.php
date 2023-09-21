@@ -42,4 +42,4 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     });
 });
 
-Auth::routes(['verify' => false, 'reset' => false, 'register' => false]);
+Auth::routes(['register' => false, 'verify' => false]);
